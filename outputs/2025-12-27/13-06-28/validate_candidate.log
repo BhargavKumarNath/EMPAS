@@ -1,0 +1,17 @@
+[2025-12-27 13:06:28,783][__main__][INFO] - === EMPAS: Final Validation ===
+[2025-12-27 13:06:49,880][__main__][INFO] - 
+--- Validating FP16 Baseline ---
+[2025-12-27 13:06:49,882][src.core.validator][INFO] - Applying Mixed-Precision Quantization...
+[2025-12-27 13:06:49,883][src.core.validator][INFO] - Model quantized. Configuration: [16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16]
+[2025-12-27 13:06:49,883][src.core.validator][INFO] - Starting Validation Loop...
+[2025-12-27 13:06:56,979][__main__][INFO] - Baseline -> Loss: 0.8869, Latency: 886.86ms
+[2025-12-27 13:07:03,254][__main__][INFO] - 
+--- Validating Evolved Architecture ---
+[2025-12-27 13:07:03,254][src.core.validator][INFO] - Applying Mixed-Precision Quantization...
+[2025-12-27 13:07:03,319][src.core.validator][INFO] - Model quantized. Configuration: [4, 16, 8, 8, 4, 4, 4, 8, 8, 8, 8, 4, 4, 8, 8, 8, 16, 16, 4, 8, 16, 16]
+[2025-12-27 13:07:03,320][src.core.validator][INFO] - Starting Validation Loop...
+[2025-12-27 13:07:09,917][__main__][INFO] - Evolved  -> Loss: 0.8244, Latency: 824.38ms
+[2025-12-27 13:07:09,917][__main__][INFO] - 
+=== RESULTS ===
+[2025-12-27 13:07:09,917][__main__][INFO] - Accuracy Drop: -0.0625 (Target: Small)
+[2025-12-27 13:07:09,917][__main__][INFO] - Model Compression: 46.6%
