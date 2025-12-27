@@ -29,21 +29,22 @@ def main(cfg: DictConfig):
     else:
         raise ValueError("Please set evaluator.type='proxy' in config")
         
-    # 3. Setup Engine
+    # Setup Configs
     algo_config = OmegaConf.to_container(cfg.algorithm, resolve=True)
+    tracking_config = OmegaConf.to_container(cfg.tracking, resolve=True)
     
-    # increase generations for the real run
-    algo_config['n_generations'] = 20
-    algo_config['pop_size'] = 50
-    
+    # Increase load for better visualisation
+    algo_config['n_generations'] = 50 
+    algo_config['pop_size'] = 100
+
     engine = GAEngine(
         search_space=space,
         evaluator=evaluator,
         config=algo_config,
-        output_dir="./data/logs/search_tinyllama"
+        tracking_config=tracking_config, # Pass tracking config
+        output_dir="./data/logs/search_tinyllama_wandb"
     )
     
-    # 4. Run Search
     engine.run()
     
     # 5. Show Best Results

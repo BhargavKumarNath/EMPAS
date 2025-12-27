@@ -1,6 +1,7 @@
 defaults:
   - search_space: llama_mixed_precision
   - algorithm: nsga2
+  - tracking: wandb
   - _self_
 
 project_name: "EMPAS"

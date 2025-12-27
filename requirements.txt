@@ -2,3 +2,6 @@ transformers
 datasets
 accelerate
 sentencepiece
+wandb
+matplotlib
+plotly

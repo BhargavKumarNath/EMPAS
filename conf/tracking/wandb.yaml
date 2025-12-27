@@ -1,0 +1,5 @@
+enabled: true
+project: "empas-search"
+entity: null 
+job_type: "search"
+tags: ["tinyllama", "mixed-precision", "nsga2"]
