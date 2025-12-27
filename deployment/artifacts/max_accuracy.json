@@ -1,0 +1,35 @@
+{
+    "archetype": "max_accuracy",
+    "metrics": {
+        "predicted_loss": 3.3058765530586243,
+        "predicted_vram_mb": 2032.0,
+        "predicted_latency_score": 54.54545454545454
+    },
+    "config": {
+        "base_model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        "quantization_map": {
+            "layer_0": 4,
+            "layer_1": 16,
+            "layer_2": 8,
+            "layer_3": 8,
+            "layer_4": 8,
+            "layer_5": 8,
+            "layer_6": 16,
+            "layer_7": 16,
+            "layer_8": 16,
+            "layer_9": 8,
+            "layer_10": 4,
+            "layer_11": 8,
+            "layer_12": 8,
+            "layer_13": 8,
+            "layer_14": 8,
+            "layer_15": 4,
+            "layer_16": 8,
+            "layer_17": 4,
+            "layer_18": 8,
+            "layer_19": 8,
+            "layer_20": 8,
+            "layer_21": 8
+        }
+    }
+}

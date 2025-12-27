@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 class ProxyEvaluator(Evaluator):
     def __init__(self, profile_path: str):
         if not os.path.exists(profile_path):
-            raise FileNotFoundError(f"Prifile not found at {profile_path}. Run profile_sensitivity.py first")
+            raise FileNotFoundError(f"Profile not found at {profile_path}. Run profile_sensitivity.py first")
         
         with open(profile_path, 'r') as f:
             data = json.load(f)
@@ -19,7 +19,7 @@ class ProxyEvaluator(Evaluator):
         self.sensitivity = data['sensitivity']
         self.layer_params = data['layer_params']
 
-        self.context_overhead_mb = 256.0
+        self.context_overhead_mb = 1024.0
 
     def evaluate(self, genome: Genome) -> FitnessMetrics:
         """Predict metrics based on the genome configuration"""    
@@ -38,8 +38,7 @@ class ProxyEvaluator(Evaluator):
             # Params * (bits / 8) = bytes
             params = self.layer_params.get(str(i), 0)
 
-            # bits = 16 is 2 bytes, bits = 4 is 0.5 bytes
-            total_weight_size_bytes += params * (bits / 0.8)
+            total_weight_size_bytes += params * (bits / 8.0)
 
             # 3. Latency Proxy
             weighted_bits += bits
@@ -48,7 +47,6 @@ class ProxyEvaluator(Evaluator):
         weight_mb = total_weight_size_bytes / (1024 ** 2)
         total_vram = weight_mb + self.context_overhead_mb
 
-        # Latency proxy: Just the sum of bits for now (lower is faster)
         max_bits = 16 * len(genome.genes)
         latency_proxy = (weighted_bits / max_bits) * 100.0
 
@@ -57,4 +55,3 @@ class ProxyEvaluator(Evaluator):
             vram_peak_mb=total_vram,
             latency_ms=latency_proxy
         )
-    

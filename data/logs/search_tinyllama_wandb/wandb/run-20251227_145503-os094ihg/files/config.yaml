@@ -1,0 +1,103 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            05fghbwa0mojzwrgufegbf93mvjay4x1:
+                codePath: scripts\run_search.py
+                codePathLocal: scripts\run_search.py
+                cpu_count: 8
+                cpu_count_logical: 16
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "994627096576"
+                        used: "932559581184"
+                email: bhargavkumarnathh@gmail.com
+                executable: C:\Project\EMPAS\.venv\Scripts\python.exe
+                git:
+                    commit: 7060c00b0f0e02c9ac008f6e6fe50de5676b07f4
+                    remote: https://github.com/BhargavKumarNath/EMPAS.git
+                gpu: NVIDIA GeForce RTX 4070 Laptop GPU
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 4608
+                      memoryTotal: "8585740288"
+                      name: NVIDIA GeForce RTX 4070 Laptop GPU
+                      uuid: GPU-af60b08a-0805-8dbf-77c9-9ccf689f0019
+                host: Bhargav
+                memory:
+                    total: "16421982208"
+                os: Windows-10-10.0.26200-SP0
+                program: c:\Project\EMPAS\scripts\run_search.py
+                python: CPython 3.11.9
+                root: ./data/logs/search_tinyllama_wandb
+                startedAt: "2025-12-27T14:55:03.300989Z"
+                writerId: 05fghbwa0mojzwrgufegbf93mvjay4x1
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 50
+            "2":
+                - 50
+            "3":
+                - 2
+                - 15
+                - 16
+                - 61
+            "4": 3.11.9
+            "5": 0.23.1
+            "8":
+                - 2
+                - 3
+            "12": 0.23.1
+            "13": windows-amd64
+        visualize:
+            population_plot:
+                panel_config:
+                    fieldSettings:
+                        x: vram
+                        "y": loss
+                    panelDefId: wandb/scatter/v0
+                    stringSettings:
+                        title: 'Gen 50: Loss vs VRAM'
+                    transform:
+                        name: tableWithLeafColNames
+                    userQuery:
+                        queryFields:
+                            - args:
+                                - name: runSets
+                                  value: ${runSets}
+                              fields:
+                                - fields: []
+                                  name: id
+                                - fields: []
+                                  name: name
+                                - fields: []
+                                  name: _defaultColorIndex
+                                - args:
+                                    - name: tableKey
+                                      value: population_plot_table
+                                  fields: []
+                                  name: summaryTable
+                              name: runSets
+                panel_type: Vega2
+checkpoint_freq:
+    value: 1
+crossover_rate:
+    value: 0.9
+elite_size:
+    value: 2
+mutation_rate:
+    value: 0.1
+n_generations:
+    value: 50
+name:
+    value: nsga2_simple
+pop_size:
+    value: 100
+search_space:
+    value: MixedPrecisionSearchSpace
+tournament_size:
+    value: 3

@@ -72,6 +72,23 @@ class GAEngine:
         from .pareto import dominates
         return dominates(f1, f2)
 
+    def save_checkpoint(self, generation: int, stats: Dict[str, Any]):
+        """Saves the current population and stats to a JSON file."""
+        filename = os.path.join(self.output_dir, f"checkpoint_gen_{generation}.json")
+        
+        # Serialize population: extract just the list of genes
+        population_data = [g.genes for g in self.population]
+        
+        data = {
+            "generation": generation,
+            "stats": stats,
+            "population": population_data
+        }
+        
+        with open(filename, 'w') as f:
+            json.dump(data, f, indent=4)
+        
+
     def step(self, generation: int):
         logger.info(f"--- Generation {generation} ---")
         
@@ -98,6 +115,9 @@ class GAEngine:
         logger.info(f"Stats: Loss={stats['min_loss']:.4f}, VRAM={stats['min_vram']:.0f}MB, Elites={stats['num_elites']}")
         self.history.append(stats)
         
+        # Save Checkpoint
+        self.save_checkpoint(generation, stats)
+
         # WandB Logging
         if self.tracking_cfg.get("enabled", False):
             # Log metrics
