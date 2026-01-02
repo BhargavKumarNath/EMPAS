@@ -744,9 +744,14 @@ with tab4:
     col1, col2 = st.columns([2, 1])
     
     with col1:
+        # Initialize session state if it doesn't exist
+        if "inference_prompt" not in st.session_state:
+            st.session_state.inference_prompt = "The future of Artificial Intelligence is"
+
+        # Bind the text area to session state
         prompt = st.text_area(
             "Enter your prompt:",
-            value="The future of Artificial Intelligence is",
+            key="inference_prompt",  
             height=100,
             help="Enter text to generate completions"
         )
@@ -789,10 +794,13 @@ with tab4:
                         with torch.no_grad():
                             outputs = net.generate(
                                 inputs.input_ids,
+                                attention_mask=inputs.attention_mask,
                                 max_new_tokens=max_tokens,
                                 do_sample=True,
                                 temperature=temperature,
                                 top_p=top_p,
+                                top_k=50,                
+                                repetition_penalty=1.2,  
                                 pad_token_id=tokenizer.eos_token_id
                             )
                         end_t = time.time()
@@ -864,11 +872,20 @@ with tab4:
         "In the year 2050, technology will"
     ]
     
+    # Helper function to update the prompt
+    def set_prompt(text):
+        st.session_state.inference_prompt = text
+
     cols = st.columns(len(example_prompts))
     for idx, (col, example) in enumerate(zip(cols, example_prompts)):
         with col:
-            if st.button(f"📝 Try", key=f"example_{idx}"):
-                st.rerun()
+            # Use on_click to update state before the rerun
+            st.button(
+                f"📝 Try", 
+                key=f"example_{idx}", 
+                on_click=set_prompt, 
+                args=(example,)
+            )
 
 # Footer
 st.markdown("---")
