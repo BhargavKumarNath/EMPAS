@@ -75,6 +75,7 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
 # Generate mock data if needed
 def generate_mock_search_data():
     """Generate realistic mock data for demo purposes"""
@@ -809,15 +810,26 @@ with tab4:
                         latency = (end_t - start_t) * 1000
                         
                         st.markdown("### 📝 Generated Output")
-                        st.markdown(f"```\n{output_text}\n```")
+                        st.text_area(
+                            label="Output Text", 
+                            value=output_text, 
+                            height=300,  # Makes the box bigger (300px tall)
+                            label_visibility="collapsed" # Hides the small label above the box
+                        )
                         st.caption(f"⏱️ Generation time: {latency:.2f}ms | 🔢 Tokens: {max_tokens}")
                         
                     except Exception as e:
                         st.error(f"Generation failed: {str(e)}")
                         st.info("Showing mock output for demonstration")
                         mock_output = prompt + " transforming industries through intelligent automation, enhanced decision-making capabilities, and revolutionary approaches to problem-solving. As we continue to develop more sophisticated AI systems, the integration of machine learning and neural networks..."
-                        st.markdown("### 📝 Generated Output (Demo)")
-                        st.markdown(f"```\n{mock_output}\n```")
+                        
+                        st.markdown("### 📝 Generated Output (Demo Mode)")
+                        st.text_area(
+                            label="Output Text", 
+                            value=mock_output, 
+                            height=300, 
+                            label_visibility="collapsed"
+                        )
                         st.caption(f"⏱️ Estimated generation time: ~{metrics['predicted_latency_score']:.2f}ms")
                 else:
                     # Mock generation for demo
@@ -831,8 +843,13 @@ with tab4:
                     
                     mock_output = prompt + mock_outputs.get(prompt, mock_outputs["default"])
                     
-                    st.markdown("### 📝 Generated Output (Demo Mode)")
-                    st.markdown(f"```\n{mock_output}\n```")
+                    st.markdown("### 📝 Generated Output (Demo)")
+                    st.text_area(
+                        label="Output Text", 
+                        value=mock_output, 
+                        height=300, 
+                        label_visibility="collapsed"
+                    )
                     st.caption(f"⏱️ Estimated latency: {metrics['predicted_latency_score']:.2f}ms | 🔢 Tokens: {max_tokens}")
     
     with col2:
